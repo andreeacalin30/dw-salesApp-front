@@ -26,6 +26,7 @@ import { TableVanzatoriComponent } from './tables/table-vanzatori/table-vanzator
 import { HttpClientModule } from '@angular/common/http';
 import {MatTableModule} from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material';
+import { UpdateLinieVanzareComponent } from './update/update-linie-vanzare/update-linie-vanzare.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -42,7 +43,8 @@ import { MatPaginatorModule } from '@angular/material';
     TableProiecteComponent,
     TableSucursaleComponent,
     TableVanzariComponent,
-    TableVanzatoriComponent
+    TableVanzatoriComponent,
+    UpdateLinieVanzareComponent
   ],
   imports: [
     BrowserModule,

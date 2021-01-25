@@ -106,6 +106,7 @@ export class FormVanzariComponent implements OnInit {
         totalLinie,this.linieVanzare.get('idProiect').value)
         this.listaLiniiVanzari.push(newLinieVanzare); 
         console.log( this.listaLiniiVanzari)
+        this.vanzareForm.get('total').setValue(this.calculTotalFinal())
         }
   }
 
@@ -143,14 +144,12 @@ export class FormVanzariComponent implements OnInit {
 
   adaugaVanzareFinala(){
     let vanzareDeBaza= new Vanzare(null,this.vanzareForm.get('codPartener').value,this.vanzareForm.get('status').value,
-    this.dataVanzare,this.dataLivrareVanzare,this.vanzareForm.get('total').value,
+    this.dataVanzare,this.dataLivrareVanzare,this.calculTotalFinal(),
     this.vanzareForm.get('vatVanzare').value,this.vanzareForm.get('discountVanzare').value,this.vanzareForm.get('moneda').value,
     this.vanzareForm.get('platit').value,this.vanzareForm.get('comentarii').value,this.vanzareForm.get('codVanzator').value,
     this.vanzareForm.get('idSucursala').value)
     let vanzareFinala = new VanzareDTO(vanzareDeBaza, this.listaLiniiVanzari)
     console.log(vanzareFinala);
-    console.log(this.calculTotalFinal());
-    
   }
 
 }

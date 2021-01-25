@@ -13,6 +13,7 @@ import { TableVanzatoriComponent } from './tables/table-vanzatori/table-vanzator
 import { TableVanzariComponent } from './tables/table-vanzari/table-vanzari.component';
 import { TableSucursaleComponent } from './tables/table-sucursale/table-sucursale.component';
 import { TableProiecteComponent } from './tables/table-proiecte/table-proiecte.component';
+import { UpdateLinieVanzareComponent } from './update/update-linie-vanzare/update-linie-vanzare.component';
 
 const routes: Routes = [
   {
@@ -64,6 +65,10 @@ const routes: Routes = [
   {
     path: 'table-proiecte',
     component: TableProiecteComponent
+  },
+  {
+    path: 'update-linieVanzare',
+    component: UpdateLinieVanzareComponent
   },
 ];
 

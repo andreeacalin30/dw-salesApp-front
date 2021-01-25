@@ -16,6 +16,8 @@ export class SalesService {
   private ParteneriPath=Settings.serverUrl+"/parteneri";
   private SucursalePath=Settings.serverUrl+"/sucursale";
   private ProiectePath=Settings.serverUrl+"/proiecte";
+  private VanzariPath=Settings.serverUrl+"/vanzari";
+  private LiniiVanzariPath=Settings.serverUrl+"/liniiVanzari";
   private GrupeArticolePath=Settings.serverUrl+"/grupeArticole";
   constructor(private http: HttpClient) { }
 
@@ -40,6 +42,32 @@ export class SalesService {
     .set('Content-Type', 'application/json');
     return this.http.get(this.VanzatoriPath, {
         headers
+    }); 
+  }
+
+  getVanzari(): Observable<any> {
+    const headers = new HttpHeaders()
+    .set('Accept', '*/*')
+    .set('Access-Control-Allow-Origin', '*')
+    .set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
+    .set('Access-Control-Allow-Headers', '*')
+    .set('Content-Type', 'application/json');
+    return this.http.get(this.VanzariPath, {
+        headers
+    }); 
+  }
+
+  getLiniiVanzariByIdVanzare(idVanzare: any): Observable<any> {
+    const headers = new HttpHeaders()
+    .set('Accept', '*/*')
+    .set('Access-Control-Allow-Origin', '*')
+    .set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
+    .set('Access-Control-Allow-Headers', '*')
+    .set('Content-Type', 'application/json');
+    const params=new HttpParams()
+    .set('IDIntrare', idVanzare)
+    return this.http.get(this.LiniiVanzariPath, {
+        headers, params
     }); 
   }
 
@@ -138,6 +166,19 @@ export class SalesService {
     .set('Access-Control-Allow-Headers', 'X-Requested-With,content-type')
     .set('Content-Type', 'application/json');
     return this.http.post(this.SucursalePath, sucursalaDTO, {
+        headers
+    }); 
+  }
+
+  updateLinieVanzare(linieVanzare: any): Observable<any> {
+    console.log('post')
+    const headers = new HttpHeaders()
+    .set('Accept', '*/*')
+    .set('Access-Control-Allow-Origin', '*')
+    .set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
+    .set('Access-Control-Allow-Headers', 'X-Requested-With,content-type')
+    .set('Content-Type', 'application/json');
+    return this.http.put(this.LiniiVanzariPath, linieVanzare, {
         headers
     }); 
   }

@@ -27,16 +27,8 @@ margin-right: -500px;
 
 }
 
-table {
-    width: 100%;
-  }
-  
-  .mat-form-field {
-    font-size: 14px;
-    width: 100%;
-  }
-  
-  td, th {
-    width: 10%;
-    
-  }
+#adauga-linie-btn{
+    background-color:wheat;
+    width: 160px;
+    border-radius: 10px;
+}
