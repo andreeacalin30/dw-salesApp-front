@@ -183,6 +183,22 @@ export class SalesService {
     }); 
   }
 
+  deleteLinieVanzare(IDIntrare: any, NumarLinie: any): Observable<any> {
+    console.log('post')
+    const headers = new HttpHeaders()
+    .set('Accept', '*/*')
+    .set('Access-Control-Allow-Origin', '*')
+    .set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
+    .set('Access-Control-Allow-Headers', 'X-Requested-With,content-type')
+    .set('Content-Type', 'application/json');
+    const params=new HttpParams()
+    .set('IDIntrare', IDIntrare)
+    .set('NumarLinie', NumarLinie)
+    return this.http.delete(this.LiniiVanzariPath, {
+        headers, params
+    }); 
+  }
+
 
   
 }

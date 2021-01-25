@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { GeneralDialogComponent } from 'src/app/dialogs/general-dialog/general-dialog.component';
 import { Vanzare } from 'src/app/models/vanzare.model';
 import { SalesService } from 'src/app/services/sales.service';
 
@@ -17,11 +18,19 @@ export class TableVanzariComponent implements OnInit {
 
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: false}) sort: MatSort;
-  constructor(private salesService: SalesService) { }
+  constructor(private salesService: SalesService, private dialog:MatDialog) { }
 
   isExpansionDetailRow = (row: any) => row.hasOwnProperty('detailRow');
 
   async ngOnInit() {
+    this.incarcaLiniiTabel();
+   
+    this.dataSource = new MatTableDataSource( this.vanzariLista);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  async incarcaLiniiTabel(){
     this.vanzariLista=await this.getVanzariLista();
     console.log(this.vanzariLista[0].IDIntrare)
     for(let i=0; i<this.vanzariLista.length; i++){
@@ -29,10 +38,6 @@ export class TableVanzariComponent implements OnInit {
       this.liniiVanzari.push(liniiVanzare);
     }
     console.log( this.liniiVanzari)
-   
-    this.dataSource = new MatTableDataSource( this.vanzariLista);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
   }
 
   async getVanzariLista(){
@@ -43,6 +48,16 @@ export class TableVanzariComponent implements OnInit {
    editLinieVanzare(event: any, IDIntrare: any, NumarLinie: any){
       window.open("update-linieVanzare?IDIntrare=" + IDIntrare + "&NumarLinie=" + NumarLinie);
    }
+
+   deleteLinieVanzare(event: any, IDIntrare: any, NumarLinie: any){
+    let dialogRef = this.dialog.open(GeneralDialogComponent);
+
+     dialogRef.componentInstance.onOk.subscribe(() => {
+      this.salesService.deleteLinieVanzare(IDIntrare, NumarLinie).subscribe(data=>{console.log(data);
+        this.liniiVanzari=[];
+        this.incarcaLiniiTabel();})
+      });
+ }
 
   async getLinieVanzare(event:any, IdIntrare: string){
     var lista= await this.salesService.getVanzari().toPromise();

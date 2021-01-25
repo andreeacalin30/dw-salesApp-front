@@ -27,6 +27,8 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatTableModule} from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material';
 import { UpdateLinieVanzareComponent } from './update/update-linie-vanzare/update-linie-vanzare.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { GeneralDialogComponent } from './dialogs/general-dialog/general-dialog.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,8 +46,10 @@ import { UpdateLinieVanzareComponent } from './update/update-linie-vanzare/updat
     TableSucursaleComponent,
     TableVanzariComponent,
     TableVanzatoriComponent,
-    UpdateLinieVanzareComponent
+    UpdateLinieVanzareComponent,
+    GeneralDialogComponent
   ],
+  entryComponents:[GeneralDialogComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -59,7 +63,8 @@ import { UpdateLinieVanzareComponent } from './update/update-linie-vanzare/updat
     MatNativeDateModule,
     HttpClientModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]
