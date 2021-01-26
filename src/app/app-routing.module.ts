@@ -14,6 +14,7 @@ import { TableVanzariComponent } from './tables/table-vanzari/table-vanzari.comp
 import { TableSucursaleComponent } from './tables/table-sucursale/table-sucursale.component';
 import { TableProiecteComponent } from './tables/table-proiecte/table-proiecte.component';
 import { UpdateLinieVanzareComponent } from './update/update-linie-vanzare/update-linie-vanzare.component';
+import { FormRaportComponent } from './rapoarte/form-raport/form-raport.component';
 
 const routes: Routes = [
   {
@@ -69,6 +70,10 @@ const routes: Routes = [
   {
     path: 'update-linieVanzare',
     component: UpdateLinieVanzareComponent
+  },
+  {
+    path: 'form-rapoarte',
+    component: FormRaportComponent
   },
 ];
 

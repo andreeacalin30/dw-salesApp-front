@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { PartenerDTO } from '../models/partenerDTO.model';
+import { RaportDTO } from '../models/raportDTO.model';
 import { SucursalaDTO } from '../models/sucursalaDTO.model';
 import { VanzatorDTO } from '../models/vanzatorDTO.model';
 import { Settings } from '../settings';
@@ -19,6 +20,7 @@ export class SalesService {
   private VanzariPath=Settings.serverUrl+"/vanzari";
   private LiniiVanzariPath=Settings.serverUrl+"/liniiVanzari";
   private GrupeArticolePath=Settings.serverUrl+"/grupeArticole";
+  private FormReportPath=Settings.serverUrl+"/formReport";
   constructor(private http: HttpClient) { }
 
   getUM(): Observable<any> {
@@ -67,6 +69,25 @@ export class SalesService {
     const params=new HttpParams()
     .set('IDIntrare', idVanzare)
     return this.http.get(this.LiniiVanzariPath, {
+        headers, params
+    }); 
+  }
+
+  getValoriRaport(raportDTO: RaportDTO): Observable<any> {
+    const headers = new HttpHeaders()
+    .set('Accept', '*/*')
+    .set('Access-Control-Allow-Origin', '*')
+    .set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
+    .set('Access-Control-Allow-Headers', '*')
+    .set('Content-Type', 'application/json');
+    const params=new HttpParams()
+    .set('CodVanzator', raportDTO.CodVanzator)
+    .set('NumeArticol', raportDTO.NumeArticol)
+    .set('NumePartener', raportDTO.NumePartener)
+    .set('NumeSucursala', raportDTO.NumeSucursala)
+    .set('DataStart', raportDTO.DataStart)
+    .set('DataEnd', raportDTO.DataEnd)
+    return this.http.get(this.FormReportPath, {
         headers, params
     }); 
   }

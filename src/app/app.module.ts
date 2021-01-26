@@ -29,6 +29,7 @@ import { MatPaginatorModule } from '@angular/material';
 import { UpdateLinieVanzareComponent } from './update/update-linie-vanzare/update-linie-vanzare.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import { GeneralDialogComponent } from './dialogs/general-dialog/general-dialog.component';
+import { FormRaportComponent } from './rapoarte/form-raport/form-raport.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +48,8 @@ import { GeneralDialogComponent } from './dialogs/general-dialog/general-dialog.
     TableVanzariComponent,
     TableVanzatoriComponent,
     UpdateLinieVanzareComponent,
-    GeneralDialogComponent
+    GeneralDialogComponent,
+    FormRaportComponent
   ],
   entryComponents:[GeneralDialogComponent],
   imports: [

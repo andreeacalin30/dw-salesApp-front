@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class MenuComponent implements OnInit {
   formularOptions:boolean = false;
   tabelOptions:boolean=false;
+  rapoarteOptions:boolean=false;
   constructor(private router:Router) { }
 
   ngOnInit() {
@@ -21,6 +22,10 @@ export class MenuComponent implements OnInit {
 
   openTableOptions(){
     this.tabelOptions=!this.tabelOptions;
+  }
+
+  openRapoarteOptions(){
+    this.rapoarteOptions=!this.rapoarteOptions;
   }
 
   goToArticoleForm(){
@@ -61,5 +66,11 @@ export class MenuComponent implements OnInit {
   }
   goToProiecteTable(){
     this.router.navigateByUrl('/table-proiecte');
+  }
+  goToRaportForm(){
+    this.router.navigateByUrl('/form-rapoarte');
+  }
+  goToGrafice(){
+    this.router.navigateByUrl('');
   }
 }
