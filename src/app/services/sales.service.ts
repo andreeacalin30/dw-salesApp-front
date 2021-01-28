@@ -1,7 +1,9 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Articol } from '../models/articol.model';
 import { PartenerDTO } from '../models/partenerDTO.model';
+import { Proiect } from '../models/proiect.model';
 import { RaportDTO } from '../models/raportDTO.model';
 import { SucursalaDTO } from '../models/sucursalaDTO.model';
 import { VanzareDTO } from '../models/vanzareDTO.model';
@@ -194,6 +196,32 @@ export class SalesService {
     .set('Access-Control-Allow-Headers', 'X-Requested-With,content-type')
     .set('Content-Type', 'application/json');
     return this.http.post(this.ParteneriPath, partenerDTO, {
+        headers
+    }); 
+  }
+
+  postArticol(articol: Articol): Observable<any> {
+    console.log('post')
+    const headers = new HttpHeaders()
+    .set('Accept', '*/*')
+    .set('Access-Control-Allow-Origin', '*')
+    .set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
+    .set('Access-Control-Allow-Headers', 'X-Requested-With,content-type')
+    .set('Content-Type', 'application/json');
+    return this.http.post(this.ArticolePath, articol, {
+        headers
+    }); 
+  }
+
+  postProiect(proiect: Proiect): Observable<any> {
+    console.log('post')
+    const headers = new HttpHeaders()
+    .set('Accept', '*/*')
+    .set('Access-Control-Allow-Origin', '*')
+    .set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
+    .set('Access-Control-Allow-Headers', 'X-Requested-With,content-type')
+    .set('Content-Type', 'application/json');
+    return this.http.post(this.ProiectePath, proiect, {
         headers
     }); 
   }

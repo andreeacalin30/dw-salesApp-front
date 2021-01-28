@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Proiect } from 'src/app/models/proiect.model';
+import { SalesService } from 'src/app/services/sales.service';
 
 @Component({
   selector: 'app-form-proiecte',
@@ -12,7 +13,7 @@ export class FormProiecteComponent implements OnInit {
   public proiectForm: FormGroup;
   validDeLa: any;
   validPanaLa: any;
-  constructor( private formBuilder: FormBuilder) {
+  constructor( private formBuilder: FormBuilder, private salesService:SalesService) {
 
     this.proiectForm = this.formBuilder.group({
       idProiect: ['', [Validators.required]],
@@ -29,8 +30,9 @@ export class FormProiecteComponent implements OnInit {
 
   adaugaProiect(){
     let proiect=new Proiect(this.proiectForm.get('idProiect').value, this.proiectForm.get('numeProiect').value,
-    this.proiectForm.get('validDeLa').value, this.proiectForm.get('validPanaLa').value,
+    this.validDeLa,this.validPanaLa,
     this.proiectForm.get('activ').value)
+    this.salesService.postProiect(proiect).subscribe(data=>{console.log(data)})
   }
 
   parseValidDeLa(value: any){

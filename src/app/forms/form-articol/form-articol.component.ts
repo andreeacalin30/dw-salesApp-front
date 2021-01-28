@@ -50,6 +50,7 @@ adaugaArticol(){
     this.articolForm.get('cantitateStoc').value,this.articolForm.get('idUnitateMasura').value)
     console.log(newArticol)
     this.articolForm.get('codArticol').setValue(this.makeid(7));
+    this.salesService.postArticol(newArticol).subscribe(data=>{console.log(data)});
   }
 }
 
