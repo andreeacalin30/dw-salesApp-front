@@ -131,9 +131,9 @@ export class FormRaportComponent implements OnInit {
     this.valoriNormaleList=await this.getValoriRaport(raportDTO);
     this.valoriCombinateList=await this.getValoriCombinateRaport(raportDTO);
     let valoriMedii=[]
-    valoriMedii.push(this.valoriCombinateList[0])
+    valoriMedii.push(this.valoriCombinateList[1])
     let valoriTotale=[]
-    valoriTotale.push(this.valoriCombinateList[1])
+    valoriTotale.push(this.valoriCombinateList[0])
     if(this.raportForm.get('afiseazaRaport').value=="Valori normale"){
     this.dataSource1 = new MatTableDataSource( this.valoriNormaleList);
     this.dataSource1.paginator = this.paginator1;
