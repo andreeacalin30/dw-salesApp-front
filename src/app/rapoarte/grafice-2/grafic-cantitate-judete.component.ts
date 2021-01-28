@@ -34,8 +34,6 @@ export class GraficCantitateJudeteComponent implements OnInit {
   public chartLabelsVolum: Array<any> = [];
   public volumLivratZile :any;
   constructor(private salesService: SalesService) { 
- 
-
     this.getDiscountTrimestre();
    this.getChartVOlumLIvrat()
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { RaportDTO } from 'src/app/models/raportDTO.model';
@@ -35,9 +35,10 @@ export class FormRaportComponent implements OnInit {
   dataSource1: MatTableDataSource<RaportValoriNormaleDTO>;
   dataSource2: MatTableDataSource<RaportValoriMediiDTO>;
   dataSource3: MatTableDataSource<RaportValoriTotaleDTO>;
-  @ViewChild(MatPaginator, {static: false}) paginator1: MatPaginator;
-  @ViewChild(MatPaginator, {static: false}) paginator2: MatPaginator;
-  @ViewChild(MatPaginator, {static: false}) paginator3: MatPaginator;
+  @ViewChild("paginator1", {static: false}) paginator1: MatPaginator;
+  @ViewChild("paginator2", {static: false}) paginator2: MatPaginator;
+  @ViewChild("paginator3", {static: false}) paginator3: MatPaginator;
+  @ViewChildren(MatPaginator) paginator = new QueryList<MatPaginator>();
 
   public afiseazaRaportLista=[{nume: "Valori normale"}, 
   {nume:"Media valorilor"},

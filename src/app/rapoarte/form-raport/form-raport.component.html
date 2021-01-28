@@ -79,7 +79,7 @@
             </div>
         </form>
         <div class="mat-elevation-z8" id="valori-normale-table" *ngIf="valoriNormale">
-            <table mat-table [dataSource]="dataSource1" matSort>
+            <table mat-table [dataSource]="dataSource1" >
         
               <ng-container matColumnDef="pret">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Pret</th>
@@ -121,10 +121,10 @@
               <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
               <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
-            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+            <mat-paginator  #paginator1 [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5"></mat-paginator>
         </div>
         <div class="mat-elevation-z8" id="valori-medii-table" *ngIf="valoriMedii">
-            <table mat-table [dataSource]="dataSource2" matSort>
+            <table mat-table [dataSource]="dataSource2" >
         
                 <ng-container matColumnDef="pret">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header> Pret Mediu</th>
@@ -168,10 +168,10 @@
             
               </table>
           
-            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+            <mat-paginator #paginator2 [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
         </div>
         <div class="mat-elevation-z8" id="valori-totale-table" *ngIf="valoriTotale">
-            <table mat-table [dataSource]="dataSource3" matSort>
+            <table mat-table [dataSource]="dataSource3" >
         
                 <ng-container matColumnDef="pret">
                   <th mat-header-cell *matHeaderCellDef mat-sort-header> Pret Total</th>
@@ -215,7 +215,7 @@
             
               </table>
           
-            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+            <mat-paginator  #paginator3 [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="paginator.pageSize"></mat-paginator>
         </div>
     </div>
 
