@@ -18,17 +18,17 @@
           
               <ng-container matColumnDef="numeProiect">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Nume proiect </th>
-                <td mat-cell *matCellDef="let row"> {{row.NumeProiect}}% </td>
+                <td mat-cell *matCellDef="let row"> {{row.NumeProiect}} </td>
               </ng-container>
 
               <ng-container matColumnDef="validDeLa">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Valid de la </th>
-                <td mat-cell *matCellDef="let row"> {{row.validDeLa}} </td>
+                <td mat-cell *matCellDef="let row"> {{row.ValidDeLa}} </td>
               </ng-container>
 
               <ng-container matColumnDef="validPanaLa">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Valid pana la</th>
-                <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.validPanaLa}} </td>
+                <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.ValidPanaLa}} </td>
               </ng-container>
 
               <ng-container matColumnDef="activ">
