@@ -32,39 +32,12 @@ export class GraficCantitateJudeteComponent implements OnInit {
     { data: [], label: 'Vanzare Totala Per Grupe Articole' }
   ];
   public chartLabelsVolum: Array<any> = [];
-  public volumLivratZile =[
-    {
-    ZiSaptamana: "Luni",
-    VolumMediuLivrat : 243.347
-    },
-    {
-      ZiSaptamana: "Marti",
-      VolumMediuLivrat : 121.347
-      },
-      {
-        ZiSaptamana: "Miercuri",
-        VolumMediuLivrat : 41.347
-  },
-  {
-    ZiSaptamana: "Joi",
-    VolumMediuLivrat : 110.347
-},
-{
-  ZiSaptamana: "Vineri",
-  VolumMediuLivrat : 94.347
-},
-{
-  ZiSaptamana: "Sambata",
-  VolumMediuLivrat : 20.347
-}]
+  public volumLivratZile :any;
   constructor(private salesService: SalesService) { 
-    for(let i=0; i<this.volumLivratZile.length; i++){
-      this.chartDatasetsVolumLivratZile[0].data.push(this.volumLivratZile[i].VolumMediuLivrat)
-      this.chartLabelsVolum.push(this.volumLivratZile[i].ZiSaptamana)
-    }
+ 
 
     this.getDiscountTrimestre();
-   
+   this.getChartVOlumLIvrat()
   }
 
   async getDiscountTrimestre(){
@@ -74,7 +47,7 @@ export class GraficCantitateJudeteComponent implements OnInit {
       series: [
         {
           name: "Discount din Total",
-          data: [0]
+          data: []
         }
       ],
       chart: {
@@ -112,7 +85,17 @@ export class GraficCantitateJudeteComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
+   ngOnInit() {
+    
+  }
+
+  async  getChartVOlumLIvrat(){
+    this.volumLivratZile= await this.salesService.getVolumZile().toPromise();
+    console.log(this.volumLivratZile)
+    for(let i=0; i<this.volumLivratZile.length; i++){
+      this.chartDatasetsVolumLivratZile[0].data.push(this.volumLivratZile[i].VolumMediuLivrat)
+      this.chartLabelsVolum.push(this.volumLivratZile[i].ZiSaptamana)
+    }
   }
   public chartType: string = 'bar';
   public chartColors: Array<any> = [

@@ -18,8 +18,8 @@
                     </div>
                 </div>
                 <div *ngFor="let linii of liniiVanzari">
-                    <div *ngFor="let linie of linii"  style="border-bottom: black solid 1px;">
-                        <div *ngIf="linie.IDIntrare==vanzare.IDIntrare" style="border-top:  black solid 1px; padding-left:4em; cursor: pointer;" class="d-flex">
+                    <div *ngFor="let linie of linii"  >
+                        <div *ngIf="linie.IDIntrare==vanzare.IDIntrare" style="cursor: pointer;" class="d-flex">
                             <div style="padding-top: 3px;">
                                 <span class="material-icons" >
                                     arrow_right_alt

@@ -41,6 +41,7 @@ export class GraficeComponent implements OnInit {
  async  ngOnInit() {
 
     this.vanzariGrupaArticole=await this.salesService.getVanzariGrupeArticole().toPromise();
+    console.log(this.vanzariGrupaArticole)
     for(let i=0; i<this.vanzariGrupaArticole.length; i++){
       this.chartDatasetsVanzareTotalaGrupe[0].data.push(this.vanzariGrupaArticole[i].VanzareTotala)
       this.chartLabelsGrupe.push(this.vanzariGrupaArticole[i].NumeGrupa)
