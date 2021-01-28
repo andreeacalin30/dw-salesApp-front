@@ -21,6 +21,7 @@ export class SalesService {
   private LiniiVanzariPath=Settings.serverUrl+"/liniiVanzari";
   private GrupeArticolePath=Settings.serverUrl+"/grupeArticole";
   private FormReportPath=Settings.serverUrl+"/formReport";
+  private FormReportCombinedPath=Settings.serverUrl+"/groupedFormReport";
   constructor(private http: HttpClient) { }
 
   getUM(): Observable<any> {
@@ -89,6 +90,37 @@ export class SalesService {
     .set('DataEnd', raportDTO.DataEnd)
     return this.http.get(this.FormReportPath, {
         headers, params
+    }); 
+  }
+
+  getValoriCombinateRaport(raportDTO: RaportDTO): Observable<any> {
+    const headers = new HttpHeaders()
+    .set('Accept', '*/*')
+    .set('Access-Control-Allow-Origin', '*')
+    .set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
+    .set('Access-Control-Allow-Headers', '*')
+    .set('Content-Type', 'application/json');
+    const params=new HttpParams()
+    .set('CodVanzator', raportDTO.CodVanzator)
+    .set('NumeArticol', raportDTO.NumeArticol)
+    .set('NumePartener', raportDTO.NumePartener)
+    .set('NumeSucursala', raportDTO.NumeSucursala)
+    .set('DataStart', raportDTO.DataStart)
+    .set('DataEnd', raportDTO.DataEnd)
+    return this.http.get(this.FormReportCombinedPath, {
+        headers, params
+    }); 
+  }
+
+  getVanzariGrupeArticole(): Observable<any> {
+    const headers = new HttpHeaders()
+    .set('Accept', '*/*')
+    .set('Access-Control-Allow-Origin', '*')
+    .set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
+    .set('Access-Control-Allow-Headers', '*')
+    .set('Content-Type', 'application/json');
+    return this.http.get(Settings.serverUrl+"/vanzariGrupeArticole", {
+        headers
     }); 
   }
 

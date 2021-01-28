@@ -25,7 +25,8 @@ export class FormRaportComponent implements OnInit {
   public valoriNormale:boolean;
   public valoriMedii:boolean;
   public valoriTotale:boolean;
-  public allList:any;
+  public valoriNormaleList:any;
+  public valoriCombinateList:any;
   public valoriNormaleDTO:RaportValoriNormaleDTO;
   public valoriMediiDTO:RaportValoriMediiDTO;
   public valoriTotaleDTO:RaportValoriTotaleDTO;
@@ -54,6 +55,12 @@ export class FormRaportComponent implements OnInit {
     });
     
    }
+
+   async getValoriCombinateRaport(raportDTO: RaportDTO){
+    var lista= await this.salesService.getValoriCombinateRaport(raportDTO).toPromise();
+    return lista
+   }
+
 
    async getValoriRaport(raportDTO: RaportDTO){
     var lista= await this.salesService.getValoriRaport(raportDTO).toPromise();
@@ -119,18 +126,32 @@ export class FormRaportComponent implements OnInit {
     let codVanzator=this.raportForm.get('codVanzator').value!=""?this.raportForm.get('codVanzator').value:""
     let dataStart=this.raportForm.get('dataStart').value!=""?this.dataStart:""
     let dataEnd=this.raportForm.get('dataEnd').value!=""?this.dataEnd:""
+
     let raportDTO=new RaportDTO(numeArticol,numePartener,numeSucursala,codVanzator,dataStart,dataEnd);
-    this.allList=await this.getValoriRaport(raportDTO);
-    console.log(this.allList)
+    this.valoriNormaleList=await this.getValoriRaport(raportDTO);
+    this.valoriCombinateList=await this.getValoriCombinateRaport(raportDTO);
+    let valoriMedii=[]
+    valoriMedii.push(this.valoriCombinateList[0])
+    let valoriTotale=[]
+    valoriTotale.push(this.valoriCombinateList[1])
     if(this.raportForm.get('afiseazaRaport').value=="Valori normale"){
-    
-    // this.dataSource1 = new MatTableDataSource( this.sucursaleLista);
-    // this.dataSource1.paginator = this.paginator1;
+    this.dataSource1 = new MatTableDataSource( this.valoriNormaleList);
+    this.dataSource1.paginator = this.paginator1;
       this.valoriNormale=true;
+      this.valoriMedii=false;
+      this.valoriTotale=false;
     } else if(this.raportForm.get('afiseazaRaport').value=="Media valorilor"){
       this.valoriMedii=true;
+      this.dataSource2 = new MatTableDataSource(valoriMedii );
+      this.dataSource2.paginator = this.paginator2;
+        this.valoriNormale=false;
+        this.valoriTotale=false;
     } else if(this.raportForm.get('afiseazaRaport').value=="Totalul valorilor"){
       this.valoriTotale=true;
+      this.dataSource3 = new MatTableDataSource(valoriTotale);
+      this.dataSource3.paginator = this.paginator3;
+        this.valoriMedii=false;
+        this.valoriNormale=false;
     }
   }
 

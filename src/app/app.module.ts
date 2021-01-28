@@ -30,6 +30,11 @@ import { UpdateLinieVanzareComponent } from './update/update-linie-vanzare/updat
 import {MatDialogModule} from '@angular/material/dialog';
 import { GeneralDialogComponent } from './dialogs/general-dialog/general-dialog.component';
 import { FormRaportComponent } from './rapoarte/form-raport/form-raport.component';
+import { GraficeComponent } from './rapoarte/grafice/grafice.component';
+import { ChartsModule, WavesModule } from 'angular-bootstrap-md';
+import { GraficCantitateJudeteComponent } from './rapoarte/grafice-2/grafic-cantitate-judete.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +54,9 @@ import { FormRaportComponent } from './rapoarte/form-raport/form-raport.componen
     TableVanzatoriComponent,
     UpdateLinieVanzareComponent,
     GeneralDialogComponent,
-    FormRaportComponent
+    FormRaportComponent,
+    GraficeComponent,
+    GraficCantitateJudeteComponent
   ],
   entryComponents:[GeneralDialogComponent],
   imports: [
@@ -66,7 +73,11 @@ import { FormRaportComponent } from './rapoarte/form-raport/form-raport.componen
     HttpClientModule,
     MatTableModule,
     MatPaginatorModule,
-    MatDialogModule
+    MatDialogModule,
+    ChartsModule,
+     WavesModule,
+     NgApexchartsModule
+     
   ],
   providers: [],
   bootstrap: [AppComponent]

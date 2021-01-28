@@ -70,7 +70,10 @@ export class MenuComponent implements OnInit {
   goToRaportForm(){
     this.router.navigateByUrl('/form-rapoarte');
   }
-  goToGrafice(){
-    this.router.navigateByUrl('');
+  goToGrafice1(){
+    this.router.navigateByUrl('/grafice1');
+  }
+  goToGrafice2(){
+    this.router.navigateByUrl('/grafice2');
   }
 }

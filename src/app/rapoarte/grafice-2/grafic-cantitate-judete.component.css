@@ -20,10 +20,9 @@ margin-right: -500px;
     margin-bottom: 30px;
 }
 
-#afiseaza-btn{
+#adauga-btn{
     background-color:wheat;
-    width: 140px;
-    height: 45px;
+    width: 110px;
     border-radius: 10px;
 
 }
@@ -38,6 +37,6 @@ table {
   }
   
   td, th {
-    width: 10%;
+    width: 20%;
     
   }

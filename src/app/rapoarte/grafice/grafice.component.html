@@ -1,0 +1,43 @@
+<div class="d-flex">
+    <app-menu id="menu-object"></app-menu>
+    <div class="col-sm-10 mt-4 d-flex" style="overflow-y: scroll;">
+        <div>
+            <div id="form-title">
+                Grafic Vanzare Totala in functie de Grupe
+            </div>
+            <div style="display: block; width:600px; height: 400px;">
+                <canvas mdbChart
+                    [chartType]="chartType"
+                    [datasets]="chartDatasetsVanzareTotalaGrupe"
+                    [labels]="chartLabelsGrupe"
+                    [colors]="chartColors"
+                    [options]="chartOptions"
+                    [legend]="true"
+                    (chartHover)="chartHovered($event)"
+                    (chartClick)="chartClicked($event)">
+                </canvas>
+            </div>
+        </div>
+       
+        <div style="margin-left: 20px;">
+            <div id="form-title">
+                Grafic Cantitati vandute pe judete si unitati de masura
+            </div>
+            <apx-chart style="display: block;height: 500px; width: 700px;"
+                [series]="chartOptionsMultiBar.series"
+                [chart]="chartOptionsMultiBar.chart"
+                [dataLabels]="chartOptionsMultiBar.dataLabels"
+                [plotOptions]="chartOptionsMultiBar.plotOptions"
+                [xaxis]="chartOptionsMultiBar.xaxis"
+                [stroke]="chartOptionsMultiBar.stroke">
+            </apx-chart>
+        </div>
+    </div>
+    <div>
+        
+    </div>
+
+</div>
+
+
+
