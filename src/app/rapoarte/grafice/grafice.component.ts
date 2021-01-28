@@ -8,6 +8,7 @@ import {
   ApexPlotOptions,
   ApexStroke
 } from "ng-apexcharts";
+import { SalesService } from 'src/app/services/sales.service';
 
 export type MultiBarChartOptions = {
   series: ApexAxisChartSeries;
@@ -28,44 +29,30 @@ export class GraficeComponent implements OnInit {
     { data: [], label: 'Vanzare Totala Per Grupe Articole' }
   ];
   public chartLabelsGrupe: Array<any> = [];
-  public vanzariGrupaArticole=[
-    {
-    NumeGrupa: "a",
-    VanzareTotala: 11.347
-    },
-    {
-      NumeGrupa: "b",
-      VanzareTotala: 121.347
-      },
-      {
-        NumeGrupa: "c",
-        VanzareTotala: 41.347
-  }]
+  public vanzariGrupaArticole: Array<any> = [];
+  public cantitatiJudete: Array<any> = [];
   @ViewChild("chart", {static:false}) chart: ChartComponent;
   public chartOptionsMultiBar: Partial<MultiBarChartOptions>;
-  constructor() {
+  constructor(private salesService: SalesService) {
+   
+    this.getCantitatJudete();
+   }
+
+ async  ngOnInit() {
+
+    this.vanzariGrupaArticole=await this.salesService.getVanzariGrupeArticole().toPromise();
     for(let i=0; i<this.vanzariGrupaArticole.length; i++){
       this.chartDatasetsVanzareTotalaGrupe[0].data.push(this.vanzariGrupaArticole[i].VanzareTotala)
       this.chartLabelsGrupe.push(this.vanzariGrupaArticole[i].NumeGrupa)
     }
+  }
 
+  async getCantitatJudete(){
     this.chartOptionsMultiBar = {
-      series: [
-        {
-          name: "Unitate masura 1",
-          data: [44, 55, 41, 64, 22, 43, 21]
-        },
-        {
-          name: "Unitate masura 2",
-
-          data: [53, 32, 33, 52, 13, 44, 32]
-        },
-        {
-          name: "Unitate masura 3",
-
-          data: [53, 32, 33, 52, 13, 44, 32]
-        }
-      ],
+      series: [  {
+        name: "serie1",
+        data: [12]
+      }],
       chart: {
         type: "bar"
       },
@@ -91,12 +78,34 @@ export class GraficeComponent implements OnInit {
         colors: ["#fff"]
       },
       xaxis: {
-        categories: ["Bucuresti","Giurgiu", "Ialomita", "Prahova", "Cluj"]
+        categories: []
       }
     };
-   }
+    this.cantitatiJudete=await this.salesService.getCantitatiJudete().toPromise();
+    let existingUM=Array.from(new Set(this.cantitatiJudete.map((item: any) => item.Um)))
+    let existingJudete=Array.from(new Set(this.cantitatiJudete.map((item: any) => item.Judet)))
+    console.log(existingJudete)
+    for(let i=0; i<existingJudete.length; i++){
+      var noQuotesJud = existingJudete[i].split('"').join('');
+      this.chartOptionsMultiBar.xaxis.categories.push(noQuotesJud)
+    }
 
-  ngOnInit() {
+    for(let j=0; j< existingUM.length; j++){
+      var noQuotes = existingUM[j].split('"').join('');
+      console.log(noQuotes)
+      let obj={
+        name:noQuotes,
+        data:[]
+      }
+      for(let i=0; i<this.cantitatiJudete.length; i++){
+        if(this.cantitatiJudete[i].Um==existingUM[j]){
+          obj.data.push(this.cantitatiJudete[i].CantitateMedie)
+        }
+      }
+      
+      this.chartOptionsMultiBar.series.push(obj)
+      console.log(this.chartOptionsMultiBar.xaxis.categories)
+    }
   }
 
   public chartType: string = 'bar';

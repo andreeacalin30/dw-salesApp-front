@@ -9,6 +9,7 @@ import {
   ApexStroke,
   ApexGrid
 } from "ng-apexcharts";
+import { SalesService } from 'src/app/services/sales.service';
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -56,18 +57,24 @@ export class GraficCantitateJudeteComponent implements OnInit {
   ZiSaptamana: "Sambata",
   VolumMediuLivrat : 20.347
 }]
-  constructor() { 
+  constructor(private salesService: SalesService) { 
     for(let i=0; i<this.volumLivratZile.length; i++){
       this.chartDatasetsVolumLivratZile[0].data.push(this.volumLivratZile[i].VolumMediuLivrat)
       this.chartLabelsVolum.push(this.volumLivratZile[i].ZiSaptamana)
     }
 
+    this.getDiscountTrimestre();
+   
+  }
 
+  async getDiscountTrimestre(){
+    let discountTrimestre=await this.salesService.getDiscountTrimeste().toPromise();
+    console.log(discountTrimestre)
     this.chartOptionsDiscount = {
       series: [
         {
           name: "Discount din Total",
-          data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
+          data: [0]
         }
       ],
       chart: {
@@ -94,19 +101,15 @@ export class GraficCantitateJudeteComponent implements OnInit {
         }
       },
       xaxis: {
-        categories: [
-          "Jan",
-          "Feb",
-          "Mar",
-          "Apr",
-          "May",
-          "Jun",
-          "Jul",
-          "Aug",
-          "Sep"
-        ]
+        categories: ['Jan']
       }
     };
+    let existingTrim=Array.from(new Set(discountTrimestre.map((item: any) => item.Trimestru)))
+    console.log(existingTrim)
+    this.chartOptionsDiscount.xaxis.categories=existingTrim
+    for(let i=0; i<discountTrimestre.length; i++){
+      this.chartOptionsDiscount.series[0].data.push(discountTrimestre[i].ProcentDiscount)
+    }
   }
 
   ngOnInit() {

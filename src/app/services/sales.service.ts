@@ -114,7 +114,7 @@ export class SalesService {
         headers, params
     }); 
   }
-
+/////////////////graphics
   getVanzariGrupeArticole(): Observable<any> {
     const headers = new HttpHeaders()
     .set('Accept', '*/*')
@@ -127,6 +127,42 @@ export class SalesService {
     }); 
   }
 
+  getCantitatiJudete(): Observable<any> {
+    const headers = new HttpHeaders()
+    .set('Accept', '*/*')
+    .set('Access-Control-Allow-Origin', '*')
+    .set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
+    .set('Access-Control-Allow-Headers', '*')
+    .set('Content-Type', 'application/json');
+    return this.http.get(Settings.serverUrl+"/cantitatiJudete", {
+        headers
+    }); 
+  }
+
+  getVolumZile(): Observable<any> {
+    const headers = new HttpHeaders()
+    .set('Accept', '*/*')
+    .set('Access-Control-Allow-Origin', '*')
+    .set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
+    .set('Access-Control-Allow-Headers', '*')
+    .set('Content-Type', 'application/json');
+    return this.http.get(Settings.serverUrl+"/volumZile", {
+        headers
+    }); 
+  }
+
+  getDiscountTrimeste(): Observable<any> {
+    const headers = new HttpHeaders()
+    .set('Accept', '*/*')
+    .set('Access-Control-Allow-Origin', '*')
+    .set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
+    .set('Access-Control-Allow-Headers', '*')
+    .set('Content-Type', 'application/json');
+    return this.http.get(Settings.serverUrl+"/discountTrimestre", {
+        headers
+    }); 
+  }
+///////////////////////////////////
   getArticole(): Observable<any> {
     const headers = new HttpHeaders()
     .set('Accept', '*/*')
