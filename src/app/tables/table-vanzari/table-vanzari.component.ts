@@ -32,7 +32,7 @@ export class TableVanzariComponent implements OnInit {
 
   async incarcaLiniiTabel(){
     this.vanzariLista=await this.getVanzariLista();
-    console.log(this.vanzariLista[0].IDIntrare)
+    console.log(this.vanzariLista)
     for(let i=0; i<this.vanzariLista.length; i++){
       let liniiVanzare=await this.getLiniiByIdLista(this.vanzariLista[i].IDIntrare)
       this.liniiVanzari.push(liniiVanzare);

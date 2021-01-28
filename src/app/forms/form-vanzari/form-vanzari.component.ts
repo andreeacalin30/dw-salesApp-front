@@ -149,6 +149,7 @@ export class FormVanzariComponent implements OnInit {
     this.vanzareForm.get('platit').value,this.vanzareForm.get('comentarii').value,this.vanzareForm.get('codVanzator').value,
     this.vanzareForm.get('idSucursala').value)
     let vanzareFinala = new VanzareDTO(vanzareDeBaza, this.listaLiniiVanzari)
+    this.salesService.postVanzare(vanzareFinala).subscribe();
     console.log(vanzareFinala);
   }
 

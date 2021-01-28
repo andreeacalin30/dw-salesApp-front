@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { PartenerDTO } from '../models/partenerDTO.model';
 import { RaportDTO } from '../models/raportDTO.model';
 import { SucursalaDTO } from '../models/sucursalaDTO.model';
+import { VanzareDTO } from '../models/vanzareDTO.model';
 import { VanzatorDTO } from '../models/vanzatorDTO.model';
 import { Settings } from '../settings';
 
@@ -222,6 +223,20 @@ export class SalesService {
         headers
     }); 
   }
+
+  postVanzare(vanzareDTO: VanzareDTO): Observable<any> {
+    console.log('post')
+    const headers = new HttpHeaders()
+    .set('Accept', '*/*')
+    .set('Access-Control-Allow-Origin', '*')
+    .set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
+    .set('Access-Control-Allow-Headers', 'X-Requested-With,content-type')
+    .set('Content-Type', 'application/json');
+    return this.http.post(this.VanzariPath, vanzareDTO, {
+        headers
+    }); 
+  }
+
 
   updateLinieVanzare(linieVanzare: any): Observable<any> {
     console.log('post')
