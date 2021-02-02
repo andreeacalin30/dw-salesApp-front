@@ -151,8 +151,6 @@ export class FormRaportComponent implements OnInit {
       }
     } else {
       let dialogRef = this.dialog.open(ErrorDialogComponent);
-
-    
     }
     
   }

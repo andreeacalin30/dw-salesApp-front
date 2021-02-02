@@ -39,7 +39,8 @@ export class GraficeComponent implements OnInit {
         'rgba(255, 206, 86, 0.2)',
         'rgba(75, 192, 192, 0.2)',
         'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)'
+        'rgba(255, 159, 64, 0.2)',
+        
       ],
       borderColor: [
         'rgba(255,99,132,1)',
@@ -59,11 +60,31 @@ export class GraficeComponent implements OnInit {
   public chartClicked(e: any): void { }
   public vanzariGrupaArticole: Array<any> = [];
   public cantitatiJudete: Array<any> = [];
-  @ViewChild("chart", {static:false}) chart: ChartComponent;
-  public chartOptionsMultiBar: Partial<MultiBarChartOptions>;
-  constructor(private salesService: SalesService) {
+  public chartDatasetsCantitatiJudete: Array<any> = [];
+  public chartLabelsGrupeMultiBar: Array<any> = [];
+  public red='rgba(255, 99, 132, 0.2)'
+  public blue='rgba(54, 162, 235, 0.2)'
+  public yellow='rgba(255, 206, 86, 0.2)'
+  public green='rgba(75, 192, 192, 0.2)'
+  public purple='rgba(255, 99, 132, 0.2)'
+  public orange='rgba(255, 159, 64, 0.2)'
+  public colors=[this.red, this.blue, this.yellow, this.green, this.purple, this.orange]
+  public red_b='rgba(255,99,132,1)'
+  public blue_b='rgba(54, 162, 235, 1)'
+  public yellow_b='rgba(255, 206, 86, 1)'
+  public green_b='rgba(75, 192, 192, 1)'
+  public purple_b='rgba(153, 102, 255, 1)'
+  public orange_b='rgba(255, 159, 64, 1)'
+  public borders=[this.red_b, this.blue_b, this.yellow_b, this.green_b, this.purple_b, this.orange_b]
   
-    this.getCantitatJudete();
+  public chartColorsMultiBar: Array<any> = [
+    
+  ];
+
+  public chart1Ready=false;
+  public chart2Ready=false;
+  constructor(private salesService: SalesService) {
+  this.getCantitatJudete();
    }
 
    ngOnInit() {
@@ -71,6 +92,7 @@ export class GraficeComponent implements OnInit {
       { data: [], label: 'Vanzare Totala Per Grupe Articole' }
     ];
     this.getVanzariGrupaArticole();
+    console.log(this.chartDatasetsVanzareTotalaGrupe)
   }
 
   async getVanzariGrupaArticole(){
@@ -80,42 +102,13 @@ export class GraficeComponent implements OnInit {
       this.chartDatasetsVanzareTotalaGrupe[0].data.push(this.vanzariGrupaArticole[i].VanzareTotala)
       this.chartLabelsGrupe.push(this.vanzariGrupaArticole[i].NumeGrupa)
     }
+    this.chart1Ready=true;
     console.log( this.chartDatasetsVanzareTotalaGrupe)
     console.log( this.chartLabelsGrupe)
   }
 
-
   async getCantitatJudete(){
-    this.chartOptionsMultiBar = {
-      series: [ ],
-      chart: {
-        type: "bar"
-      },
-      plotOptions: {
-        bar: {
-          horizontal: true,
-          dataLabels: {
-            position: "top"
-          }
-        }
-      },
-      dataLabels: {
-        enabled: true,
-        offsetX: -6,
-        style: {
-          fontSize: "12px",
-          colors: ["#fff"]
-        }
-      },
-      stroke: {
-        show: true,
-        width: 1,
-        colors: ["#fff"]
-      },
-      xaxis: {
-        categories: []
-      }
-    };
+  
     this.cantitatiJudete=await this.salesService.getCantitatiJudete().toPromise();
     console.log(this.cantitatiJudete)
     let existingUM=Array.from(new Set(this.cantitatiJudete.map((item: any) => item.Um)))
@@ -123,24 +116,31 @@ export class GraficeComponent implements OnInit {
     console.log(existingJudete)
     for(let i=0; i<existingJudete.length; i++){
       var noQuotesJud = existingJudete[i].split('"').join('');
-      this.chartOptionsMultiBar.xaxis.categories.push(noQuotesJud)
+      this.chartLabelsGrupeMultiBar.push(noQuotesJud)
     }
 
     for(let j=0; j< existingUM.length; j++){
       var noQuotes = existingUM[j].split('"').join('');
       console.log(noQuotes)
-      let obj={
-        name:noQuotes,
-        data:[]
+      let dataObj={ data: [], label: noQuotes }
+      let colorObj={
+        backgroundColor: [],
+        borderColor: [],
+        borderWidth: 2,
       }
+    
       for(let i=0; i<this.cantitatiJudete.length; i++){
         if(this.cantitatiJudete[i].Um==existingUM[j]){
-          obj.data.push(this.cantitatiJudete[i].CantitateMedie)
+          dataObj.data.push(this.cantitatiJudete[i].CantitateMedie)
+          colorObj.backgroundColor.push(this.colors[j])
+          colorObj.borderColor.push(this.borders[j])
         }
       }
+      this.chartColorsMultiBar.push(colorObj)
       
-      this.chartOptionsMultiBar.series.push(obj)
-      console.log(this.chartOptionsMultiBar.xaxis.categories)
+      this.chartDatasetsCantitatiJudete.push(dataObj)
+      this.chart2Ready=true;
+      console.log( this.chartDatasetsCantitatiJudete)
     }
   }
 }
