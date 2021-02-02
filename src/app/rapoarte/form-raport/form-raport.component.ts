@@ -1,16 +1,18 @@
-import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { GridOptions, Module } from '@ag-grid-community/all-modules';
+import { ChangeDetectorRef, Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { RaportDTO } from 'src/app/models/raportDTO.model';
 import { RaportValoriMediiDTO } from 'src/app/models/raportValoriMediiDTO.model';
 import { RaportValoriNormaleDTO } from 'src/app/models/raportValoriNormaleDTO';
 import { RaportValoriTotaleDTO } from 'src/app/models/raportValoriTotaleDTO.model';
 import { SalesService } from 'src/app/services/sales.service';
-
+import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-model';
+import { MdbTableDirective, MdbTablePaginationComponent } from 'angular-bootstrap-md';
 @Component({
   selector: 'app-form-raport',
   templateUrl: './form-raport.component.html',
-  styleUrls: ['./form-raport.component.css']
+  styleUrls: ['./form-raport.component.scss']
 })
 export class FormRaportComponent implements OnInit {
 
@@ -22,9 +24,7 @@ export class FormRaportComponent implements OnInit {
   public partenerLista: any;
   dataStart: any;
   dataEnd: any;
-  public valoriNormale:boolean;
-  public valoriMedii:boolean;
-  public valoriTotale:boolean;
+  public valori:boolean;
   public valoriNormaleList:any;
   public valoriCombinateList:any;
   public valoriNormaleDTO:RaportValoriNormaleDTO;
@@ -32,19 +32,16 @@ export class FormRaportComponent implements OnInit {
   public valoriTotaleDTO:RaportValoriTotaleDTO;
 
   displayedColumns: string[] = ['pret', 'cantitate', 'vat', 'discount', 'platit', 'comision', 'volum', 'numarTranzactii'];
-  dataSource1: MatTableDataSource<RaportValoriNormaleDTO>;
-  dataSource2: MatTableDataSource<RaportValoriMediiDTO>;
-  dataSource3: MatTableDataSource<RaportValoriTotaleDTO>;
-  @ViewChild("paginator1", {static: false}) paginator1: MatPaginator;
-  @ViewChild("paginator2", {static: false}) paginator2: MatPaginator;
-  @ViewChild("paginator3", {static: false}) paginator3: MatPaginator;
-  @ViewChildren(MatPaginator) paginator = new QueryList<MatPaginator>();
+  dataSource: MatTableDataSource<any>;
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
 
   public afiseazaRaportLista=[{nume: "Valori normale"}, 
   {nume:"Media valorilor"},
   {nume: "Totalul valorilor"}]
-   constructor( private formBuilder: FormBuilder, private salesService: SalesService) {
 
+   constructor( private formBuilder: FormBuilder, private salesService: SalesService,private cdRef: ChangeDetectorRef) {
+      this.valori=false;
     this.raportForm = this.formBuilder.group({
       numePartener: [''],
       numeSucursala: [''],
@@ -54,8 +51,8 @@ export class FormRaportComponent implements OnInit {
       dataEnd:[''],
       afiseazaRaport:['']
     });
+  };
     
-   }
 
    async getValoriCombinateRaport(raportDTO: RaportDTO){
     var lista= await this.salesService.getValoriCombinateRaport(raportDTO).toPromise();
@@ -121,6 +118,7 @@ export class FormRaportComponent implements OnInit {
   }
   
   async afiseazaRaport(){
+    this.valori=true;
     let numePartener=this.raportForm.get('numePartener').value!=""?this.raportForm.get('numePartener').value:""
     let numeSucursala=this.raportForm.get('numeSucursala').value!=""?this.raportForm.get('numeSucursala').value:""
     let numeArticol=this.raportForm.get('numeArticol').value!=""?this.raportForm.get('numeArticol').value:""
@@ -135,25 +133,21 @@ export class FormRaportComponent implements OnInit {
     valoriMedii.push(this.valoriCombinateList[1])
     let valoriTotale=[]
     valoriTotale.push(this.valoriCombinateList[0])
+    console.log(this.valoriNormaleList)
     if(this.raportForm.get('afiseazaRaport').value=="Valori normale"){
-    this.dataSource1 = new MatTableDataSource( this.valoriNormaleList);
-    this.dataSource1.paginator = this.paginator1;
-      this.valoriNormale=true;
-      this.valoriMedii=false;
-      this.valoriTotale=false;
+      this.dataSource = new MatTableDataSource( this.valoriNormaleList);
+      this.dataSource.paginator = this.paginator;
     } else if(this.raportForm.get('afiseazaRaport').value=="Media valorilor"){
-      this.valoriMedii=true;
-      this.dataSource2 = new MatTableDataSource(valoriMedii );
-      this.dataSource2.paginator = this.paginator2;
-        this.valoriNormale=false;
-        this.valoriTotale=false;
+      this.dataSource = new MatTableDataSource(valoriMedii );
+      this.dataSource.paginator = this.paginator;
     } else if(this.raportForm.get('afiseazaRaport').value=="Totalul valorilor"){
-      this.valoriTotale=true;
-      this.dataSource3 = new MatTableDataSource(valoriTotale);
-      this.dataSource3.paginator = this.paginator3;
-        this.valoriMedii=false;
-        this.valoriNormale=false;
+      this.dataSource = new MatTableDataSource(valoriTotale);
+      this.dataSource.paginator = this.paginator;
     }
+  }
+
+  ngAfterViewInit() {
+    
   }
 
 }

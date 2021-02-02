@@ -6,7 +6,7 @@ import { SalesService } from 'src/app/services/sales.service';
 @Component({
   selector: 'app-form-proiecte',
   templateUrl: './form-proiecte.component.html',
-  styleUrls: ['./form-proiecte.component.css'],
+  styleUrls: ['./form-proiecte.component.scss'],
   
 })
 export class FormProiecteComponent implements OnInit {

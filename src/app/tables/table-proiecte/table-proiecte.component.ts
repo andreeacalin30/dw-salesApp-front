@@ -6,7 +6,7 @@ import { SalesService } from 'src/app/services/sales.service';
 @Component({
   selector: 'app-table-proiecte',
   templateUrl: './table-proiecte.component.html',
-  styleUrls: ['./table-proiecte.component.css']
+  styleUrls: ['./table-proiecte.component.scss']
 })
 export class TableProiecteComponent implements OnInit {
   displayedColumns: string[] = ['idProiect', 'numeProiect', 'validDeLa', 'validPanaLa', 'activ'];

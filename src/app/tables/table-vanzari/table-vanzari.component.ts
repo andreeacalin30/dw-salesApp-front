@@ -7,7 +7,7 @@ import { SalesService } from 'src/app/services/sales.service';
 @Component({
   selector: 'app-table-vanzari',
   templateUrl: './table-vanzari.component.html',
-  styleUrls: ['./table-vanzari.component.css']
+  styleUrls: ['./table-vanzari.component.scss']
 })
 export class TableVanzariComponent implements OnInit {
 

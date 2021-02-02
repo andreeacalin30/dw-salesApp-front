@@ -8,7 +8,7 @@ import { SalesService } from 'src/app/services/sales.service';
 @Component({
   selector: 'app-form-sucursale',
   templateUrl: './form-sucursale.component.html',
-  styleUrls: ['./form-sucursale.component.css']
+  styleUrls: ['./form-sucursale.component.scss']
 })
 export class FormSucursaleComponent implements OnInit {
   public sucursalaForm: FormGroup;

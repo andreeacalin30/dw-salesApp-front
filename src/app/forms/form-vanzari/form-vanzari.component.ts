@@ -8,7 +8,7 @@ import { SalesService } from 'src/app/services/sales.service';
 @Component({
   selector: 'app-form-vanzari',
   templateUrl: './form-vanzari.component.html',
-  styleUrls: ['./form-vanzari.component.css']
+  styleUrls: ['./form-vanzari.component.scss']
 })
 export class FormVanzariComponent implements OnInit {
 

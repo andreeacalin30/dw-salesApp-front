@@ -6,7 +6,7 @@ import { SalesService } from 'src/app/services/sales.service';
 @Component({
   selector: 'app-form-articol',
   templateUrl: './form-articol.component.html',
-  styleUrls: ['./form-articol.component.css']
+  styleUrls: ['./form-articol.component.scss']
 })
 export class FormArticolComponent implements OnInit {
   public articolForm: FormGroup;

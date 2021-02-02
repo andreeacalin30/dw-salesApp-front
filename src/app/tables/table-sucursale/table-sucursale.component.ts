@@ -7,7 +7,7 @@ import { SalesService } from 'src/app/services/sales.service';
 @Component({
   selector: 'app-table-sucursale',
   templateUrl: './table-sucursale.component.html',
-  styleUrls: ['./table-sucursale.component.css']
+  styleUrls: ['./table-sucursale.component.scss']
 })
 export class TableSucursaleComponent implements OnInit {
 

@@ -6,7 +6,7 @@ import { SalesService } from 'src/app/services/sales.service';
 @Component({
   selector: 'app-table-articol',
   templateUrl: './table-articol.component.html',
-  styleUrls: ['./table-articol.component.css']
+  styleUrls: ['./table-articol.component.scss']
 })
 export class TableArticolComponent implements OnInit {
   displayedColumns: string[] = ['codArticol', 'numeArticol', 'codGrupa', 'cantitateStoc', 'idUM'];

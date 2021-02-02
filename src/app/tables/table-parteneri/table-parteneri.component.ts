@@ -6,7 +6,7 @@ import { SalesService } from 'src/app/services/sales.service';
 @Component({
   selector: 'app-table-parteneri',
   templateUrl: './table-parteneri.component.html',
-  styleUrls: ['./table-parteneri.component.css']
+  styleUrls: ['./table-parteneri.component.scss']
 })
 export class TableParteneriComponent implements OnInit {
   displayedColumns: string[] = ['codPartener', 'numePartener', 'cui', 'email', 'idAdresa'];

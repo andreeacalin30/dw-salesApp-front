@@ -9,7 +9,7 @@ import { SalesService } from 'src/app/services/sales.service';
 @Component({
   selector: 'app-update-linie-vanzare',
   templateUrl: './update-linie-vanzare.component.html',
-  styleUrls: ['./update-linie-vanzare.component.css']
+  styleUrls: ['./update-linie-vanzare.component.scss']
 })
 export class UpdateLinieVanzareComponent implements OnInit {
 

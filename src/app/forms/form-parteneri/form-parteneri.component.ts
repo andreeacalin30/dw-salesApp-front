@@ -7,7 +7,7 @@ import { SalesService } from 'src/app/services/sales.service';
 @Component({
   selector: 'app-form-parteneri',
   templateUrl: './form-parteneri.component.html',
-  styleUrls: ['./form-parteneri.component.css']
+  styleUrls: ['./form-parteneri.component.scss']
 })
 export class FormParteneriComponent implements OnInit {
 

@@ -23,7 +23,7 @@ export type ChartOptions = {
 @Component({
   selector: 'app-grafic-cantitate-judete',
   templateUrl: './grafic-cantitate-judete.component.html',
-  styleUrls: ['./grafic-cantitate-judete.component.css']
+  styleUrls: ['./grafic-cantitate-judete.component.scss']
 })
 export class GraficCantitateJudeteComponent implements OnInit {
   @ViewChild("chart", {static:false}) chart: ChartComponent;

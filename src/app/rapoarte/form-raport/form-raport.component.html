@@ -78,61 +78,16 @@
                 </div>
             </div>
         </form>
-        <div class="mat-elevation-z8" id="valori-normale-table" *ngIf="valoriNormale">
-            <table mat-table [dataSource]="dataSource1" >
-        
-              <ng-container matColumnDef="pret">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Pret</th>
-                <td mat-cell *matCellDef="let row"> {{row.Pret}} </td>
-              </ng-container>
-          
-              <ng-container matColumnDef="cantitate">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantitate</th>
-                <td mat-cell *matCellDef="let row"> {{row.Cantitate}} </td>
-              </ng-container>
-        
-              <ng-container matColumnDef="vat">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> VAT </th>
-                <td mat-cell *matCellDef="let row"> {{row.VAT}} </td>
-              </ng-container>
-          
-              <ng-container matColumnDef="discount">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Discount </th>
-                <td mat-cell *matCellDef="let row"> {{row.Discount}} </td>
-              </ng-container>
-
-              <ng-container matColumnDef="platit">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Platit</th>
-                <td mat-cell *matCellDef="let row"> {{row.Platit}} </td>
-              </ng-container>
-              <ng-container matColumnDef="comision">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Comision </th>
-                <td mat-cell *matCellDef="let row"> {{row.Comision}} </td>
-              </ng-container>
-              <ng-container matColumnDef="volum">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Volum </th>
-                <td mat-cell *matCellDef="let row"> {{row.Volum}} </td>
-              </ng-container>
-              <ng-container matColumnDef="numarTranzactii">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>NumarTranzactii </th>
-                <td mat-cell *matCellDef="let row"> {{row.NumarTranzactii}} </td>
-              </ng-container>
-
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
-            <mat-paginator  #paginator1 [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5"></mat-paginator>
-        </div>
-        <div class="mat-elevation-z8" id="valori-medii-table" *ngIf="valoriMedii">
-            <table mat-table [dataSource]="dataSource2" >
+        <div class="mat-elevation-z8" id="valori-table" *ngIf="valori">
+            <table mat-table [dataSource]="dataSource" >
         
                 <ng-container matColumnDef="pret">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Pret Mediu</th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Pret </th>
                   <td mat-cell *matCellDef="let row"> {{row.Pret}} </td>
                 </ng-container>
             
                 <ng-container matColumnDef="cantitate">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantitate Medie</th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantitate </th>
                   <td mat-cell *matCellDef="let row"> {{row.Cantitate}} </td>
                 </ng-container>
           
@@ -142,24 +97,24 @@
                 </ng-container>
             
                 <ng-container matColumnDef="discount">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Discount Mediu</th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Discount </th>
                   <td mat-cell *matCellDef="let row"> {{row.Discount}} </td>
                 </ng-container>
   
                 <ng-container matColumnDef="platit">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Platit Mediu</th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Platit </th>
                   <td mat-cell *matCellDef="let row"> {{row.Platit}} </td>
                 </ng-container>
                 <ng-container matColumnDef="comision">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Comision Mediu</th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Comision </th>
                   <td mat-cell *matCellDef="let row"> {{row.Comision}} </td>
                 </ng-container>
                 <ng-container matColumnDef="volum">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Volum Mediu</th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Volum </th>
                   <td mat-cell *matCellDef="let row"> {{row.Volum}} </td>
                 </ng-container>
                 <ng-container matColumnDef="numarTranzactii">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>NumarTranzactii Mediu</th>
+                  <th mat-header-cell *matHeaderCellDef mat-sort-header>NumarTranzactii  </th>
                   <td mat-cell *matCellDef="let row"> {{row.NumarTranzactii}} </td>
                 </ng-container>
   
@@ -168,54 +123,7 @@
             
               </table>
           
-            <mat-paginator #paginator2 [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-        </div>
-        <div class="mat-elevation-z8" id="valori-totale-table" *ngIf="valoriTotale">
-            <table mat-table [dataSource]="dataSource3" >
-        
-                <ng-container matColumnDef="pret">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Pret Total</th>
-                  <td mat-cell *matCellDef="let row"> {{row.Pret}} </td>
-                </ng-container>
-            
-                <ng-container matColumnDef="cantitate">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Cantitate Totala</th>
-                  <td mat-cell *matCellDef="let row"> {{row.Cantitate}} </td>
-                </ng-container>
-          
-                <ng-container matColumnDef="vat">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> VAT </th>
-                  <td mat-cell *matCellDef="let row"> {{row.VAT}} </td>
-                </ng-container>
-            
-                <ng-container matColumnDef="discount">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Discount Total</th>
-                  <td mat-cell *matCellDef="let row"> {{row.Discount}} </td>
-                </ng-container>
-  
-                <ng-container matColumnDef="platit">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header> Platit Total</th>
-                  <td mat-cell *matCellDef="let row"> {{row.PlatitTotal}} </td>
-                </ng-container>
-                <ng-container matColumnDef="comision">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Comision Total</th>
-                  <td mat-cell *matCellDef="let row"> {{row.Comision}} </td>
-                </ng-container>
-                <ng-container matColumnDef="volum">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>Volum Total</th>
-                  <td mat-cell *matCellDef="let row"> {{row.Volum}} </td>
-                </ng-container>
-                <ng-container matColumnDef="numarTranzactii">
-                  <th mat-header-cell *matHeaderCellDef mat-sort-header>NumarTranzactii Total </th>
-                  <td mat-cell *matCellDef="let row"> {{row.NumarTranzactii}} </td>
-                </ng-container>
-  
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            
-              </table>
-          
-            <mat-paginator  #paginator3 [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="paginator.pageSize"></mat-paginator>
+            <mat-paginator  #paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="paginator.pageSize"></mat-paginator>
         </div>
     </div>
 

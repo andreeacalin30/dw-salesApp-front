@@ -7,7 +7,7 @@ import { SalesService } from 'src/app/services/sales.service';
 @Component({
   selector: 'app-table-vanzatori',
   templateUrl: './table-vanzatori.component.html',
-  styleUrls: ['./table-vanzatori.component.css']
+  styleUrls: ['./table-vanzatori.component.scss']
 })
 export class TableVanzatoriComponent implements OnInit {
   displayedColumns: string[] = ['codVanzator', 'numeVanzator', 'prenume', 'salariuBaza', 'comision','email','idAdresa'];

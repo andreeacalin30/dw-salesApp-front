@@ -34,7 +34,8 @@ import { GraficeComponent } from './rapoarte/grafice/grafice.component';
 import { ChartsModule, WavesModule } from 'angular-bootstrap-md';
 import { GraficCantitateJudeteComponent } from './rapoarte/grafice-2/grafic-cantitate-judete.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
-
+import { AgGridModule } from '@ag-grid-community/angular';
+import {  TableModule } from 'angular-bootstrap-md';
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,7 +77,9 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     MatDialogModule,
     ChartsModule,
      WavesModule,
-     NgApexchartsModule
+     NgApexchartsModule,
+     AgGridModule.withComponents([]),
+     TableModule
      
   ],
   providers: [],

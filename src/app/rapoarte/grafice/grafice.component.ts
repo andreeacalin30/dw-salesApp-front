@@ -21,7 +21,7 @@ export type MultiBarChartOptions = {
 @Component({
   selector: 'app-grafice',
   templateUrl: './grafice.component.html',
-  styleUrls: ['./grafice.component.css']
+  styleUrls: ['./grafice.component.scss']
 })
 export class GraficeComponent implements OnInit {
   public chartType: string = 'bar';
@@ -117,6 +117,7 @@ export class GraficeComponent implements OnInit {
       }
     };
     this.cantitatiJudete=await this.salesService.getCantitatiJudete().toPromise();
+    console.log(this.cantitatiJudete)
     let existingUM=Array.from(new Set(this.cantitatiJudete.map((item: any) => item.Um)))
     let existingJudete=Array.from(new Set(this.cantitatiJudete.map((item: any) => item.Judet)))
     console.log(existingJudete)

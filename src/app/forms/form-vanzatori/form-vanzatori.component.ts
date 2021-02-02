@@ -7,7 +7,7 @@ import { SalesService } from 'src/app/services/sales.service';
 @Component({
   selector: 'app-form-vanzatori',
   templateUrl: './form-vanzatori.component.html',
-  styleUrls: ['./form-vanzatori.component.css']
+  styleUrls: ['./form-vanzatori.component.scss']
 })
 export class FormVanzatoriComponent implements OnInit {
   public vanzatoriForm: FormGroup;
