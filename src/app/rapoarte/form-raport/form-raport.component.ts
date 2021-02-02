@@ -1,7 +1,7 @@
 import { GridOptions, Module } from '@ag-grid-community/all-modules';
 import { ChangeDetectorRef, Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { RaportDTO } from 'src/app/models/raportDTO.model';
 import { RaportValoriMediiDTO } from 'src/app/models/raportValoriMediiDTO.model';
 import { RaportValoriNormaleDTO } from 'src/app/models/raportValoriNormaleDTO';
@@ -9,6 +9,7 @@ import { RaportValoriTotaleDTO } from 'src/app/models/raportValoriTotaleDTO.mode
 import { SalesService } from 'src/app/services/sales.service';
 import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-model';
 import { MdbTableDirective, MdbTablePaginationComponent } from 'angular-bootstrap-md';
+import { ErrorDialogComponent } from 'src/app/dialogs/error-dialog/error-dialog.component';
 @Component({
   selector: 'app-form-raport',
   templateUrl: './form-raport.component.html',
@@ -40,12 +41,13 @@ export class FormRaportComponent implements OnInit {
   {nume:"Media valorilor"},
   {nume: "Totalul valorilor"}]
 
-   constructor( private formBuilder: FormBuilder, private salesService: SalesService,private cdRef: ChangeDetectorRef) {
+  public defaultOption="Media valorilor";
+   constructor( private dialog: MatDialog, private formBuilder: FormBuilder, private salesService: SalesService,private cdRef: ChangeDetectorRef) {
       this.valori=false;
     this.raportForm = this.formBuilder.group({
       numePartener: [''],
       numeSucursala: [''],
-      numeArticol: [''],
+      numeArticol: ['', Validators.required],
       codVanzator: [''],
       dataStart:[''],
       dataEnd:[''],
@@ -118,32 +120,40 @@ export class FormRaportComponent implements OnInit {
   }
   
   async afiseazaRaport(){
-    this.valori=true;
-    let numePartener=this.raportForm.get('numePartener').value!=""?this.raportForm.get('numePartener').value:""
-    let numeSucursala=this.raportForm.get('numeSucursala').value!=""?this.raportForm.get('numeSucursala').value:""
-    let numeArticol=this.raportForm.get('numeArticol').value!=""?this.raportForm.get('numeArticol').value:""
-    let codVanzator=this.raportForm.get('codVanzator').value!=""?this.raportForm.get('codVanzator').value:""
-    let dataStart=this.raportForm.get('dataStart').value!=""?this.dataStart:""
-    let dataEnd=this.raportForm.get('dataEnd').value!=""?this.dataEnd:""
 
-    let raportDTO=new RaportDTO(numeArticol,numePartener,numeSucursala,codVanzator,dataStart,dataEnd);
-    this.valoriNormaleList=await this.getValoriRaport(raportDTO);
-    this.valoriCombinateList=await this.getValoriCombinateRaport(raportDTO);
-    let valoriMedii=[]
-    valoriMedii.push(this.valoriCombinateList[1])
-    let valoriTotale=[]
-    valoriTotale.push(this.valoriCombinateList[0])
-    console.log(this.valoriNormaleList)
-    if(this.raportForm.get('afiseazaRaport').value=="Valori normale"){
-      this.dataSource = new MatTableDataSource( this.valoriNormaleList);
-      this.dataSource.paginator = this.paginator;
-    } else if(this.raportForm.get('afiseazaRaport').value=="Media valorilor"){
-      this.dataSource = new MatTableDataSource(valoriMedii );
-      this.dataSource.paginator = this.paginator;
-    } else if(this.raportForm.get('afiseazaRaport').value=="Totalul valorilor"){
-      this.dataSource = new MatTableDataSource(valoriTotale);
-      this.dataSource.paginator = this.paginator;
+    if(this.raportForm.valid){
+      this.valori=true;
+      let numePartener=this.raportForm.get('numePartener').value!=""?this.raportForm.get('numePartener').value:""
+      let numeSucursala=this.raportForm.get('numeSucursala').value!=""?this.raportForm.get('numeSucursala').value:""
+      let numeArticol=this.raportForm.get('numeArticol').value!=""?this.raportForm.get('numeArticol').value:""
+      let codVanzator=this.raportForm.get('codVanzator').value!=""?this.raportForm.get('codVanzator').value:""
+      let dataStart=this.raportForm.get('dataStart').value!=""?this.dataStart:""
+      let dataEnd=this.raportForm.get('dataEnd').value!=""?this.dataEnd:""
+  
+      let raportDTO=new RaportDTO(numeArticol,numePartener,numeSucursala,codVanzator,dataStart,dataEnd);
+      this.valoriNormaleList=await this.getValoriRaport(raportDTO);
+      this.valoriCombinateList=await this.getValoriCombinateRaport(raportDTO);
+      let valoriMedii=[]
+      valoriMedii.push(this.valoriCombinateList[1])
+      let valoriTotale=[]
+      valoriTotale.push(this.valoriCombinateList[0])
+      console.log(this.valoriNormaleList)
+      if(this.raportForm.get('afiseazaRaport').value=="Valori normale"){
+        this.dataSource = new MatTableDataSource( this.valoriNormaleList);
+        this.dataSource.paginator = this.paginator;
+      } else if(this.raportForm.get('afiseazaRaport').value=="Media valorilor"){
+        this.dataSource = new MatTableDataSource(valoriMedii );
+        this.dataSource.paginator = this.paginator;
+      } else if(this.raportForm.get('afiseazaRaport').value=="Totalul valorilor"){
+        this.dataSource = new MatTableDataSource(valoriTotale);
+        this.dataSource.paginator = this.paginator;
+      }
+    } else {
+      let dialogRef = this.dialog.open(ErrorDialogComponent);
+
+    
     }
+    
   }
 
   ngAfterViewInit() {

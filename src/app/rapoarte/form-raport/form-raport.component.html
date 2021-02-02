@@ -29,9 +29,9 @@
             </div>
             <div class="row">
                 <div class="col-sm-3 mt-1">
-                    <mat-form-field > 
+                    <mat-form-field> 
                         <mat-label>Cod Articol</mat-label>
-                        <mat-select formControlName="numeArticol" >
+                        <mat-select formControlName="numeArticol"  required>
                         <mat-option *ngFor="let articol of articolLista" [value]="articol.NumeArticol">
                             {{articol.NumeArticol}}
                         </mat-option>
@@ -65,8 +65,7 @@
             <div class="row d-flex">
                 <div class="col-sm-3 mt-4">
                     <mat-form-field > 
-                        <mat-label>Raport pentru</mat-label>
-                        <mat-select formControlName="afiseazaRaport" >
+                        <mat-select [(ngModel)]="defaultOption" formControlName="afiseazaRaport" >
                         <mat-option *ngFor="let afiseaza of afiseazaRaportLista" [value]="afiseaza.nume">
                             {{afiseaza.nume}}
                         </mat-option>
