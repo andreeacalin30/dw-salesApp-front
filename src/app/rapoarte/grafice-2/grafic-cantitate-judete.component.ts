@@ -29,7 +29,7 @@ export class GraficCantitateJudeteComponent implements OnInit {
   @ViewChild("chart", {static:false}) chart: ChartComponent;
   public chartOptionsDiscount: Partial<ChartOptions>;
   public chartDatasetsVolumLivratZile: Array<any> = [
-    { data: [], label: 'Vanzare Totala Per Grupe Articole' }
+    { data: [], label: ["Volum mediu pe zi"] }
   ];
   public chartLabelsVolum: Array<any> = [];
   public volumLivratZile :any;
