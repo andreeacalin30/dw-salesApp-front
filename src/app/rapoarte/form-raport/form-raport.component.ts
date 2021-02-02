@@ -47,7 +47,7 @@ export class FormRaportComponent implements OnInit {
     this.raportForm = this.formBuilder.group({
       numePartener: [''],
       numeSucursala: [''],
-      numeArticol: ['', Validators.required],
+      numeArticol: [''],
       codVanzator: [''],
       dataStart:[''],
       dataEnd:[''],
@@ -121,7 +121,7 @@ export class FormRaportComponent implements OnInit {
   
   async afiseazaRaport(){
 
-    if(this.raportForm.valid){
+    
       this.valori=true;
       let numePartener=this.raportForm.get('numePartener').value!=""?this.raportForm.get('numePartener').value:""
       let numeSucursala=this.raportForm.get('numeSucursala').value!=""?this.raportForm.get('numeSucursala').value:""
@@ -129,7 +129,8 @@ export class FormRaportComponent implements OnInit {
       let codVanzator=this.raportForm.get('codVanzator').value!=""?this.raportForm.get('codVanzator').value:""
       let dataStart=this.raportForm.get('dataStart').value!=""?this.dataStart:""
       let dataEnd=this.raportForm.get('dataEnd').value!=""?this.dataEnd:""
-  
+      if(numePartener!=""||numeSucursala!=""||numeArticol!=""||codVanzator!=""||
+      dataStart!=""||dataEnd!=""){
       let raportDTO=new RaportDTO(numeArticol,numePartener,numeSucursala,codVanzator,dataStart,dataEnd);
       this.valoriNormaleList=await this.getValoriRaport(raportDTO);
       this.valoriCombinateList=await this.getValoriCombinateRaport(raportDTO);

@@ -31,7 +31,7 @@
                 <div class="col-sm-3 mt-1">
                     <mat-form-field> 
                         <mat-label>Cod Articol</mat-label>
-                        <mat-select formControlName="numeArticol"  required>
+                        <mat-select formControlName="numeArticol" >
                         <mat-option *ngFor="let articol of articolLista" [value]="articol.NumeArticol">
                             {{articol.NumeArticol}}
                         </mat-option>
