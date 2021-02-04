@@ -5,7 +5,7 @@ export class Settings{
     private static instance: Settings = null;
   
     // Settings
-    public static serverUrl = 'http://ec2-13-58-221-52.us-east-2.compute.amazonaws.com:8081';
+    public static serverUrl = 'http://ec2-18-224-180-153.us-east-2.compute.amazonaws.com:8081';
 
     constructor() {}
 
