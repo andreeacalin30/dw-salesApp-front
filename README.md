@@ -1,7 +1,7 @@
 # dw-salesApp-front
 Download **NodeJS** and install it.
 
-Use **VisualCode** to open de application
+Use **VisualCode** to open the application
 
 Run in the **VisualCode terminal** the commands: 
 
